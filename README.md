@@ -1,130 +1,201 @@
-# 🚗 Uber Fares Dataset Analysis Report
+# 🚗 Uber Fares Dataset Analysis - README
 
-## 🌀 Introduction
+**Course:** Introduction to Big Data Analytics - INSY 8413
+**Instructor:** Eric Maniraguha | [eric.maniraguha@auca.ac.rw](mailto:eric.maniraguha@auca.ac.rw)
+**Assignment Date:** July 20, 2025
+**Deadline:** Friday before Sabbath begins
+**Groups:** A, B & E
+**Tool:** Python (Jupyter Notebook) + Power BI Desktop
+**Dataset:** Uber Fares Dataset (from Kaggle)
 
-The purpose of this project is to analyze the Uber Fares Dataset to uncover meaningful insights that can aid decision-making and performance optimization in ride-hailing services. This report is part of the assignment for the course **Introduction to Big Data Analytics (INSY 8413)**, under the guidance of instructor **Eric Maniraguha**.
+---
 
-## 📊 Methodology
+## 🌟 Project Objective
 
-### 📂 Data Collection
+To perform end-to-end data analysis on Uber fare records using Python and Power BI. The project uncovers patterns in ride fares, durations, geography, and time to gain insights into Uber operations.
 
-The dataset titled **"Uber Ride Price Prediction.csv"** was provided, containing columns like fare\_amount, trip\_distance, pickup and dropoff coordinates, and ride category.
+---
 
-### 📈 Data Cleaning & Preparation
+## 📅 1. Data Understanding & Preparation
 
-* Removed null/missing values
-* Removed outliers based on trip distance and fare amount
-* Calculated derived fields like `estimated_duration_minutes`
+### 📂 File Used:
 
-### 📒 Tools Used
+* `uber-raw-data.csv` (Kaggle original)
 
-* Python (Pandas, Matplotlib, Seaborn)
-* Power BI for interactive visualizations
-* Jupyter Notebook for development
+### 🔧 Steps Taken:
 
-## 📅 Analysis
+* Loaded the dataset using Pandas in Jupyter Notebook.
+* Examined structure: rows, columns, data types.
+* Checked for missing values and outliers.
+* Cleaned records with nulls, duplicates, or invalid coordinates.
+* Parsed timestamps and ensured datetime consistency.
+* Saved cleaned version as `uber-cleaned.csv`
 
-### 1. 👉 Fare Distribution (Histogram)
+### ✅ Output:
 
-* **Objective:** Visualize how fare\_amount is distributed.
-* **Tool:** Python (Seaborn)
-* **Insight:** Majority of fares lie below \$50 with long-tail distribution.
+Cleaned dataset: `uber-cleaned-with-duration.csv`
 
-```python
-plt.figure(figsize=(10, 5))
-sns.histplot(df['fare_amount'], bins=100, kde=True)
-plt.title('Fare Amount Distribution 💸')
-plt.xlabel('Fare Amount ($)')
-plt.ylabel('Frequency')
-plt.xlim(0, 100)
-plt.show()
+---
+
+## 🧰 2. Exploratory Data Analysis (EDA)
+
+Performed with Python:
+
+### ⚖️ Descriptive Statistics:
+
+* Mean, median, mode of fare\_amount
+* Standard deviation, quartiles
+* Min-max range
+* Count of unique passengers
+
+### 📊 Visualizations:
+
+* Histogram: Fare distribution
+* Box Plot: Fare amount (outliers)
+* Correlation heatmap: Distance, fare, time
+
+### 🌄 Relationships:
+
+* Fare vs Distance: Positive correlation
+* Fare vs Hour of Day: Higher in evenings
+* Outliers found in high fare or low-distance trips
+
+### 🔢 Key Calculated Fields:
+
+* `trip_distance` (estimated using coordinates)
+* `ride_duration_minutes = (trip_distance / 20) * 60`
+* Hour, Day, Month, Day\_of\_Week from pickup time
+
+---
+
+## 🌐 3. Feature Engineering
+
+### 🔄 Extracted Fields:
+
+* `hour`, `day`, `month` from timestamp
+* `day_of_week` (0 = Monday)
+* `ride_duration_minutes` (based on distance)
+
+### 🔄 Encoded Categorical Fields:
+
+* Converted pickup hour to label (morning, evening, etc.)
+* Converted day\_of\_week to labels (Monday, etc.)
+
+---
+
+## 📊 4. Data Analysis in Power BI
+
+### 📂 Imported File:
+
+* `uber-cleaned-with-duration.csv`
+
+### 🖊️ Visualizations:
+
+| Visualization                | Description                      | Status |
+| ---------------------------- | -------------------------------- | ------ |
+| Histogram of fare\_amount    | Distribution of fares            | ✅ Done |
+| Box plot of fare\_amount     | Outlier detection                | ✅ Done |
+| Ride duration (time-based)   | Based on `ride_duration_minutes` | ✅ Done |
+| Time series trend            | `pickup_datetime` vs fare        | ✅ Done |
+| Geographic map               | Pickup coordinates               | ✅ Done |
+| Ride by hour                 | Fare count by hour               | ✅ Done |
+| Average fare by weekday      | Bar chart                        | ✅ Done |
+| Passenger count distribution | Pie / bar chart                  | ✅ Done |
+| Filters: Date/Hour           | Interactivity                    | ✅ Done |
+
+---
+
+## 🔄 5. Dashboard Development in Power BI
+
+* Designed with consistent colors and formatting.
+* Included date slicers, drill-downs.
+* Grouped charts by themes: Time, Fare, Location.
+* Visuals arranged professionally on one screen.
+
+---
+
+## 📚 6. Report Summary
+
+### 📚 Introduction:
+
+The project focuses on deriving operational and economic insights from Uber trip data to understand fare trends, durations, and peak hours.
+
+### 📐 Methodology:
+
+* Python for cleaning, feature creation, and EDA
+* Exported dataset to Power BI for visualization
+* Applied DAX formulas for calculated columns
+
+### 🔢 Analysis Highlights:
+
+* Most rides are short (<15 mins)
+* Fare amount increases with distance and time
+* Most rides occur in evening rush hours (4–8 PM)
+* Saturdays have higher average fares
+
+### 📊 Results:
+
+* Clear fare distribution seen in histograms and box plots
+* Duration and fare patterns aligned with city traffic flow
+* Geographic plots show urban hotspot concentrations
+
+### 📄 Conclusion:
+
+Uber rides show predictable time-based and geographic patterns. Strategic pricing and resource allocation can improve profitability.
+
+### 🔹 Recommendations:
+
+* Offer discounts during low-demand hours
+* Allocate more drivers to evening rush hours
+* Use trip duration models to optimize pricing
+
+---
+
+## 📦 Project Folder Structure
+
+```bash
+Uber-Fare-Analysis/
+├── README.md
+├── cleaned_data/
+│   └── uber-cleaned-with-duration.csv
+├── notebooks/
+│   └── Uber_EDA.ipynb
+├── powerbi/
+│   └── UberFareDashboard.pbix
+├── screenshots/
+│   ├── eda_fare_histogram.png
+│   ├── duration_analysis.png
+│   └── dashboard_view.png
 ```
 
 ---
 
-### 2. 🛋️ Trip Distance Distribution
+## 📢 Submission Checklist
 
-* **Objective:** View the distribution of trip distances
-* **Tool:** Histogram
-* **Finding:** Most trips are under 20 miles
-
----
-
-### 3. 🔹 Estimated Duration vs Trip Distance
-
-* **Formula:** `(trip_distance ÷ 20) × 60`
-* **Chart:** Scatter Plot
-* **Insight:** Linear relation as distance increases
-
-```python
-df['estimated_duration_minutes'] = (df['trip_distance'] / 20) * 60
-plt.figure(figsize=(10, 5))
-sns.scatterplot(data=df, x='trip_distance', y='estimated_duration_minutes', hue='ride_category')
-plt.title('Estimated Duration vs Trip Distance ⏳')
-plt.xlabel('Trip Distance (miles)')
-plt.ylabel('Estimated Duration (minutes)')
-plt.show()
-```
+* [x] Cleaned CSV uploaded
+* [x] Power BI dashboard file
+* [x] Jupyter Notebook EDA
+* [x] README (this file)
+* [x] Report (in markdown / ppt)
 
 ---
 
-### 4. 📊 Box Plot of Fare Amount
+## 🚀 Tools Used
 
-* **Objective:** Show distribution and detect outliers
-* **Chart:** Box and Whisker Plot
-
-```python
-plt.figure(figsize=(10, 5))
-sns.boxplot(x=df['fare_amount'], whis=1.5, color='skyblue')
-plt.title('Box Plot of Fare Amount 💸')
-plt.xlabel('Fare Amount ($)')
-plt.show()
-```
+* Python 3.x (Jupyter Notebook)
+* Pandas, Matplotlib, Seaborn
+* Power BI Desktop
+* GitHub (for collaboration)
 
 ---
 
-### 5. 🌐 Geographic Mapping
+## 🚀 Live Preview
 
-* **Map:** Power BI
-* **Objective:** Visualize pickups and dropoffs using latitude/longitude
-* **Insight:** High concentration in urban areas
-
----
-
-### 6. 🔐 Correlation Heatmap
-
-* **Tool:** Seaborn heatmap
-* **Purpose:** Understand relation between fare, distance, duration
-
-```python
-corr = df[['fare_amount', 'trip_distance', 'estimated_duration_minutes']].corr()
-sns.heatmap(corr, annot=True, cmap='coolwarm')
-plt.title("Correlation Heatmap 📊")
-plt.show()
-```
-
-## 📊 Results
-
-* Positive correlation between trip distance and fare
-* Duration grows linearly with distance
-* Outliers present in fare and distance
-* Fare varies with ride category
-
-## 🤝 Recommendations
-
-* 💡 **Outlier Filtering:** Remove extreme fare values to improve ML models
-* 🔺 **Surge Pricing:** Adjust pricing based on distance and time
-* 🌟 **Route Optimization:** Focus on peak regions visible on map
-* ⚙️ **Category Analysis:** Price models should factor in ride\_category
-
-## 🎉 Conclusion
-
-The analysis of Uber fare data provided valuable insights into pricing, trip characteristics, and passenger behavior. Visualizations confirmed expected trends while revealing hidden patterns, such as fare inconsistencies and geographic demand.
-
-> ✨ **Data is not just numbers; it’s a window into real-world behavior.**
+Power BI file: [UberFareDashboard.pbix](./powerbi/UberFareDashboard.pbix)
+Dataset: [uber-cleaned-with-duration.csv](./cleaned_data/uber-cleaned-with-duration.csv)
 
 ---
 
-📗 **Prepared By:** Ishimwe Egîde
+> ✨ "Data is the new oil. But it's crude without analysis!" ✨
 
-📆 **Submission Date:** 25 July 2025
+Made with ❤️ by Group A, B & E
