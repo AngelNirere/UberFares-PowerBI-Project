@@ -54,7 +54,7 @@ print(df.info())
 
 #### Data Loading Process
 
-<img width="1080" height="598" alt="load and save data" src="https://github.com/user-attachments/assets/7e936dd4-995d-437b-9613-c1fe1633f572" />
+<img width="1080" height="598" alt="load and save data" src="https://github.com/user-attachments/assets/1f810595-355e-401c-bf32-b4b802d443e1" />
 
 
 ### 📤 Export Cleaned Data
@@ -81,9 +81,10 @@ df_cleaned.to_csv('cleaned_data/uber-cleaned-with-duration.csv', index=False)
 
 #### Fare Distribution Histogram
 
-<img width="851" height="524" alt="distibution of bare amount" src="https://github.com/user-attachments/assets/ce245d8e-2c30-4dec-8ae4-a11cdeeb6872" />
+<img width="851" height="524" alt="distibution of bare amount" src="https://github.com/user-attachments/assets/f4cc5d01-7a24-4b82-9567-25c5c3eeddec" />
 
-python
+
+
 # Fare distribution analysis
 plt.figure(figsize=(10, 6))
 plt.hist(df['fare_amount'], bins=50, edgecolor='black', alpha=0.7)
@@ -133,7 +134,8 @@ df['estimated_duration_minutes'] = (df['trip_distance'] / 20) * 60  # Assuming 2
 
 
 
-<img width="848" height="478" alt="uber fares data analysis dashboard" src="https://github.com/user-attachments/assets/8c37affe-e362-4752-b926-fea974a9bfe3" />
+<img width="848" height="478" alt="uber fares data analysis dashboard" src="https://github.com/user-attachments/assets/84239648-e1cd-4423-83b6-e503635f8a40" />
+
 
 
 | Chart Type | Description | Status |
